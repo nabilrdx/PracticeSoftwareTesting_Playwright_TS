@@ -1,6 +1,6 @@
 import {test, expect} from '@playwright/test';
 import { LoginPage } from '../../pages/LoginPage';
-import users from '../../data/users.json'; 
+import users from '../../data/data.json'; 
 
 test.describe('Login Module', () => {
     test('Verify valid user login', async({page})=>{

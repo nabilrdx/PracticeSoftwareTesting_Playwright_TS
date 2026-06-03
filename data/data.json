@@ -6,5 +6,9 @@
   "invalidUser": {
     "email": "johncena111@yopmail.com",
     "password": "Password1"
+  },
+  "products": {
+    "existingProduct": "Hammer",
+    "nonExistingProduct": "NabilProduct123"
   }
 }
