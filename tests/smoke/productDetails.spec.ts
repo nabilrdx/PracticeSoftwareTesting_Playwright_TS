@@ -1,15 +1,19 @@
 import { test, expect, request } from '@playwright/test';
 import data from '../../data/data.json';
 import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
+import { ApiHelper } from '../../utils/ApiHelper';
 
-test.describe('Product Details Moule', () => {
-    let productIdForUrl: String;
+test.describe('Product Details Module', async () => {
+    let productIdForUrl: string;
+    const apiContext = await request.newContext();
+    const apiHelper=new ApiHelper(apiContext);
     test.beforeAll(async () => {
-        const apiContext = await request.newContext();
-        const response = await apiContext.fetch('https://api.practicesoftwaretesting.com/products/search?q=hammer');
-        const responseJson = await response.json();
-        console.log(responseJson.data[0].id, 'ProductID');
-        productIdForUrl = responseJson.data[0].id;
+        // const apiContext = await request.newContext();
+        // const response = await apiContext.fetch('https://api.practicesoftwaretesting.com/products/search?q=hammer');
+        // const responseJson = await response.json();
+        // console.log(responseJson.data[0].id, 'ProductID');
+        productIdForUrl = await apiHelper.getProductId();
+;
     })
 
     test('Verify product details page loads successfully', async ({ page }) => {
@@ -19,7 +23,7 @@ test.describe('Product Details Moule', () => {
         expect(await productDetailsPage.verifyNameAndPrice(data.pdp.productName, data.pdp.price)).toBeTruthy();
     });
 
-    test('Verify Add TO Cart', async ({ page }) => {
+    test('Verify Add To Cart', async ({ page }) => {
         let productDetailsPage = new ProductDetailsPage(page);
         await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
         await productDetailsPage.addToCart();
