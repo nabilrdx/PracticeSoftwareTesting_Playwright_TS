@@ -3,7 +3,7 @@ import { ApiHelper } from '../../utils/ApiHelper';
 import data from '../../data/data.json';
 import { CartPage } from '../../pages/CartPage';
 
-test.describe('Cart Module', () => {
+test.describe('Cart and Checkout Module', () => {
 
     test.beforeEach(async ({ page }) => {
         //we could even use beforeEach for these 2 cases, but in future at framework grows we might not need to have them, we could use fixtures too or if case we decided to have new isolated cases
@@ -34,6 +34,27 @@ test.describe('Cart Module', () => {
         await cartPage.openCartWithId(cartId);
         await cartPage.proceedToCheckout();
         await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
+    })
+
+    test.only('Verify that user is able to place order',async({page})=>{
+        const apiContext = await request.newContext();
+        const apiHelper = new ApiHelper(apiContext);
+        const cartPage = new CartPage(page)
+
+        const cartId = await apiHelper.createCart();
+        await apiHelper.addItemToCart(cartId);
+        await cartPage.openCartWithId(cartId);
+        await cartPage.proceedToCheckout();
+        await cartPage.selectContinueAsGuest();
+        await cartPage.fillBillingAddress();
+        await cartPage.selectPaymentOption();
+        await cartPage.confirmPayment();
+        await cartPage.verifyPaymentSuccessMessage();
+        await cartPage.confirmOrder();
+        const orderId =  await cartPage.getOrderId();
+        console.log(orderId);
+
+        // await page.pause();
     })
 
 })
