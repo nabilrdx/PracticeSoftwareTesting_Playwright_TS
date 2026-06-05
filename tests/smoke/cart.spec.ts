@@ -36,7 +36,7 @@ test.describe('Cart and Checkout Module', () => {
         await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
     })
 
-    test.only('Verify that user is able to place order',async({page})=>{
+    test('Verify that user is able to place order',async({page})=>{
         const apiContext = await request.newContext();
         const apiHelper = new ApiHelper(apiContext);
         const cartPage = new CartPage(page)
@@ -46,15 +46,13 @@ test.describe('Cart and Checkout Module', () => {
         await cartPage.openCartWithId(cartId);
         await cartPage.proceedToCheckout();
         await cartPage.selectContinueAsGuest();
-        await cartPage.fillBillingAddress();
-        await cartPage.selectPaymentOption();
+        await cartPage.fillBillingAddress(data.checkoutData.billingDetails);
+        await cartPage.selectPaymentOption(data.checkoutData.paymentMode);
         await cartPage.confirmPayment();
         await cartPage.verifyPaymentSuccessMessage();
         await cartPage.confirmOrder();
         const orderId =  await cartPage.getOrderId();
         console.log(orderId);
-
-        // await page.pause();
     })
 
 })

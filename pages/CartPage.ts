@@ -1,5 +1,12 @@
 import { Locator, Page } from "@playwright/test";
 
+
+type BillingDetails={
+        country: string,
+        postalCode: string,
+        houseNo:string
+    }
+
 export class CartPage {
     page: Page;
     cartItemLoaded: Locator;
@@ -21,6 +28,8 @@ export class CartPage {
     confirmPaymentCta:Locator;
     paymentSuccessMessage:Locator;
     orderId:Locator;
+    
+    
 
 
 
@@ -45,7 +54,7 @@ export class CartPage {
         this.confirmPaymentCta=this.page.locator('[data-test="finish"]');
         this.paymentSuccessMessage=this.page.locator('[data-test="payment-success-message"]');
         this.orderId=this.page.getByText('INV-');
-
+        
 
     }
 
@@ -77,19 +86,19 @@ export class CartPage {
 
     }
 
-    async fillBillingAddress(){
-        await this.billingCountryDropDown.selectOption('AL');
-        await this.billingPostal.fill('1094');
-        await this.billingHouseNo.fill('112');
-        await this.billingStreet.fill('Main Park')
-        await this.billingCity.fill('Ohio')
-        await this.billingState.fill('AR')
-        // await this.page.pause()
+    async fillBillingAddress(billingDetails: BillingDetails){
+        await this.billingCountryDropDown.selectOption(billingDetails.country);
+        await this.billingPostal.fill(billingDetails.postalCode);
+        await this.billingHouseNo.fill(billingDetails.houseNo);
+        // await this.billingStreet.fill('Main Park')
+        // await this.billingCity.fill('Ohio')
+        // await this.billingState.fill('AR')
+        // await this.billingState.inputValue()
         await this.billingProceed.click();
     }
 
-    async selectPaymentOption(){
-        await this.paymentType.selectOption('cash-on-delivery');
+    async selectPaymentOption(paymentMode:string){
+        await this.paymentType.selectOption(paymentMode);
     }
 
     async confirmPayment(){
@@ -102,7 +111,6 @@ export class CartPage {
 
     async confirmOrder(){
         await this.confirmPaymentCta.click();
-await this.page.pause();
     }
 
     async getOrderId(){

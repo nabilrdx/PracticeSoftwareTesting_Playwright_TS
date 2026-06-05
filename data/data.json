@@ -20,5 +20,13 @@
   "cart":{
     "atcProductName": "Claw Hammer with Shock Reduction Grip ",
     "atcProductQuantity": "1"
+  },
+  "checkoutData":{
+    "billingDetails":{
+      "country": "AL",
+      "postalCode": "1094",
+      "houseNo":"112"
+    },
+    "paymentMode":"cash-on-delivery"
   }
 }
