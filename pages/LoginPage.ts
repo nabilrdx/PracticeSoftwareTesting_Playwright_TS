@@ -14,7 +14,7 @@ export class LoginPage {
     }
 
     async navigateToLoginPage() {
-        await this.page.goto('https://practicesoftwaretesting.com/auth/login');
+        await this.page.goto('/auth/login');
     }
 
     async validLogin(email: string, password: string) {

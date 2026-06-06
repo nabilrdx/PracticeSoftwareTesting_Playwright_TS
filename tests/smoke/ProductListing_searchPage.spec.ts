@@ -7,7 +7,7 @@ test.describe('Product Listing/Search Module', ()=>{
     test('Verify user can search existing product', async({page, productListing_searchPage})=>{
         // let productListing_searchPage = new ProductListing_SearchPage(page);
 
-        await page.goto('https://practicesoftwaretesting.com/');
+        await page.goto('/');
         await productListing_searchPage.searchProduct(data.products.existingProduct);
         await productListing_searchPage.searchCompleted();
         expect(await productListing_searchPage.verifySearchResult(data.products.existingProduct)).toBeTruthy();
@@ -16,7 +16,7 @@ test.describe('Product Listing/Search Module', ()=>{
     test('Verify user sees no results for non-existing product', async({page, productListing_searchPage})=>{
         // let productListing_searchPage = new ProductListing_SearchPage(page);
 
-        await page.goto('https://practicesoftwaretesting.com/');
+        await page.goto('/');
         await productListing_searchPage.searchProduct(data.products.nonExistingProduct);
         await productListing_searchPage.searchCompleted();
         expect(await productListing_searchPage.verifyNoResult()).toContain('There are no products found.')

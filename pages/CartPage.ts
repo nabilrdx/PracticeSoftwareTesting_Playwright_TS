@@ -62,7 +62,7 @@ export class CartPage {
         await this.page.addInitScript(value => {
             window.sessionStorage.setItem('cart_id', value);
         }, cartId);
-        await this.page.goto('https://practicesoftwaretesting.com/checkout');
+        await this.page.goto('/checkout');
         await this.cartItemLoaded.waitFor();
     }
 

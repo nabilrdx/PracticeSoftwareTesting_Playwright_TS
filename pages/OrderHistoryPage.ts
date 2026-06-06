@@ -7,7 +7,7 @@ export class OrderHistoryPage {
     }
 
     async navigateToOrderHistoryPage() {
-        await this.page.goto('https://practicesoftwaretesting.com/account/invoices');
+        await this.page.goto('/account/invoices');
     }
 
 async getRowForOrder(orderId:string){
