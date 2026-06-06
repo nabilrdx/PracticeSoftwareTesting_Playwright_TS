@@ -21,7 +21,7 @@ export class ApiHelper {
     async getProductId() {
         let productIdForUrl: string;
         // const apiContext = await request.newContext();
-        const response = await this.apiContext.fetch('https://api.practicesoftwaretesting.com/products/search?q=hammer');
+        const response = await this.apiContext.fetch(`${process.env.API_URL}/products/search?q=hammer`);
         const responseJson = await response.json();
         console.log(responseJson.data[0].id, 'ProductID');
         productIdForUrl = responseJson.data[0].id;
@@ -32,7 +32,7 @@ export class ApiHelper {
     async createCart() {
 
         // const apiContext = await request.newContext();
-        const call = await this.apiContext.post('https://api.practicesoftwaretesting.com/carts')
+        const call = await this.apiContext.post(`${process.env.API_URL}/carts`)
         const callRespJson = await call.json();
         console.log(callRespJson.id);
         return callRespJson.id;
@@ -44,7 +44,7 @@ export class ApiHelper {
 
 
         // const apiContext = await request.newContext();
-        const call = await this.apiContext.post('https://api.practicesoftwaretesting.com/carts', {
+        const call = await this.apiContext.post(`${process.env.API_URL}/carts`, {
             headers: {
                 Authorization: `Bearer ${authToken}`
             }
@@ -58,7 +58,7 @@ export class ApiHelper {
     }
 
     async addItemToCart(cartId: string) {
-        const callAtcApi = await this.apiContext.post(`https://api.practicesoftwaretesting.com/carts/${cartId}`,
+        const callAtcApi = await this.apiContext.post(`${process.env.API_URL}/carts/${cartId}`,
             {
                 data: {
                     product_id: await this.getProductId(),
@@ -71,7 +71,7 @@ export class ApiHelper {
     }
 
     async addItemToCartForLoginUser(cartId: string, authToken: string) {
-        const callAtcApi = await this.apiContext.post(`https://api.practicesoftwaretesting.com/carts/${cartId}`,
+        const callAtcApi = await this.apiContext.post(`${process.env.API_URL}/carts/${cartId}`,
             {
                 data: {
                     product_id: await this.getProductId(),
@@ -87,7 +87,7 @@ export class ApiHelper {
     }
 
     async regsiterUser(fName: string, lName: string, email: string, password: string, address: UserAddress) {
-        const registerCall = await this.apiContext.post('https://api.practicesoftwaretesting.com/users/register',
+        const registerCall = await this.apiContext.post(`${process.env.API_URL}/users/register`,
             {
                 data: {
                     first_name: fName,
@@ -111,7 +111,7 @@ export class ApiHelper {
     }
 
     async loginUserGetToken(email: string, password: string) {
-        const loginCall = await this.apiContext.post('https://api.practicesoftwaretesting.com/users/login',
+        const loginCall = await this.apiContext.post(`${process.env.API_URL}/users/login`,
             {
                 data: {
                     email: email,
@@ -136,7 +136,7 @@ export class ApiHelper {
     }
 
     async createOrderForUser(cartId: string, authToken: string) {
-        const orderCall = await this.apiContext.post('https://api.practicesoftwaretesting.com/invoices', {
+        const orderCall = await this.apiContext.post(`${process.env.API_URL}/invoices`, {
             data: {
 
                 "billing_street": "O'Hara Roads",
