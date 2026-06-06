@@ -5,7 +5,7 @@ import { CartPage } from '../../pages/CartPage';
 import data from '../../data/data.json'
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 test.describe('Order History Module',()=>{
-test('Verify the placed order is available under order history page of the user.', async ({ page, orderHistoryPage,apiHelper }) => {
+test('Verify the placed order is available under order history page of the user. @smoke', async ({ page, orderHistoryPage,apiHelper }) => {
     // const apiContext = await request.newContext();
     // const apiHelper = new ApiHelper(apiContext);
     // let orderHistoryPage = new OrderHistoryPage(page);

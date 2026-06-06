@@ -6,7 +6,7 @@ import data from '../../data/data.json'
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
 test.describe('Order Details Module',()=>{
-test('Verify the order details page for the placed order.', async ({ page, orderDetailsPage, apiHelper }) => {
+test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper }) => {
     // const apiContext = await request.newContext();
     // const apiHelper = new ApiHelper(apiContext);
     // const orderDetailsPage=new OrderDetailsPage(page);

@@ -18,14 +18,14 @@ test.describe('Product Details Module',  () => {
 ;
     })
 
-    test('Verify product details page loads successfully', async ({ page, productDetailsPage }) => {
+    test('Verify product details page loads successfully @smoke', async ({ page, productDetailsPage }) => {
         // let productDetailsPage = new ProductDetailsPage(page);
 
         await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
         expect(await productDetailsPage.verifyNameAndPrice(data.pdp.productName, data.pdp.price)).toBeTruthy();
     });
 
-    test('Verify Add To Cart', async ({ page,productDetailsPage }) => {
+    test('Verify Add To Cart @smoke', async ({ page,productDetailsPage }) => {
         // let productDetailsPage = new ProductDetailsPage(page);
         await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
         await productDetailsPage.addToCart();
