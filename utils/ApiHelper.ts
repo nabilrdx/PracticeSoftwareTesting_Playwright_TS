@@ -1,15 +1,6 @@
 import { APIRequestContext, Page, request } from "@playwright/test";
+import { UserAddress } from "../interfaces/UserAddress";
 
-type UserAddress = {
-
-    street: string,
-    house_number: string,
-    city: string,
-    state: string,
-    country: string,
-    postal_code: string
-
-}
 
 export class ApiHelper {
     apiContext: APIRequestContext;

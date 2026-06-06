@@ -1,11 +1,8 @@
 import { Locator, Page } from "@playwright/test";
+import { BillingDetails } from "../interfaces/BillingDetails";
 
 
-type BillingDetails={
-        country: string,
-        postalCode: string,
-        houseNo:string
-    }
+
 
 export class CartPage {
     page: Page;
