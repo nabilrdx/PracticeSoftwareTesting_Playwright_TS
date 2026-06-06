@@ -1,4 +1,6 @@
-import { test, expect, request } from '@playwright/test';
+import {  expect, request } from '@playwright/test';
+import {test} from '../../fixtures/baseFixture';
+
 import data from '../../data/data.json';
 import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
 import { ApiHelper } from '../../utils/ApiHelper';
@@ -16,15 +18,15 @@ test.describe('Product Details Module',  () => {
 ;
     })
 
-    test('Verify product details page loads successfully', async ({ page }) => {
-        let productDetailsPage = new ProductDetailsPage(page);
+    test('Verify product details page loads successfully', async ({ page, productDetailsPage }) => {
+        // let productDetailsPage = new ProductDetailsPage(page);
 
         await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
         expect(await productDetailsPage.verifyNameAndPrice(data.pdp.productName, data.pdp.price)).toBeTruthy();
     });
 
-    test('Verify Add To Cart', async ({ page }) => {
-        let productDetailsPage = new ProductDetailsPage(page);
+    test('Verify Add To Cart', async ({ page,productDetailsPage }) => {
+        // let productDetailsPage = new ProductDetailsPage(page);
         await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
         await productDetailsPage.addToCart();
         // await page.getByText(data.pdp.atcToastMessage).waitFor();

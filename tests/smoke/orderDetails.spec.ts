@@ -1,14 +1,15 @@
-import { test, expect, request } from '@playwright/test';
+import {  expect, request } from '@playwright/test';
+import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
 import data from '../../data/data.json'
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
 test.describe('Order Details Module',()=>{
-test('Verify the order details page for the placed order.', async ({ page }) => {
-    const apiContext = await request.newContext();
-    const apiHelper = new ApiHelper(apiContext);
-    const orderDetailsPage=new OrderDetailsPage(page);
+test('Verify the order details page for the placed order.', async ({ page, orderDetailsPage, apiHelper }) => {
+    // const apiContext = await request.newContext();
+    // const apiHelper = new ApiHelper(apiContext);
+    // const orderDetailsPage=new OrderDetailsPage(page);
 
     const user = await apiHelper.regsiterUser(data.orderHistoryData.registerUser.fName, data.orderHistoryData.registerUser.lName, `qa-${Date.now()}@yopmail.com`, data.orderHistoryData.registerUser.password, data.orderHistoryData.registerUser.address);
     console.log(user.email, '11992288@Nn', ':::Newly registered user');
