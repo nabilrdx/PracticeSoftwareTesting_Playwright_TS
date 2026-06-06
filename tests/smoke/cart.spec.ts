@@ -53,6 +53,7 @@ test.describe('Cart and Checkout Module', () => {
         await cartPage.confirmOrder();
         const orderId =  await cartPage.getOrderId();
         console.log(orderId);
+        expect(orderId).toContain('INV-');
     })
 
 })

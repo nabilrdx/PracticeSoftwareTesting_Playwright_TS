@@ -3,11 +3,11 @@ import data from '../../data/data.json';
 import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
 import { ApiHelper } from '../../utils/ApiHelper';
 
-test.describe('Product Details Module', async () => {
+test.describe('Product Details Module',  () => {
     let productIdForUrl: string;
-    const apiContext = await request.newContext();
-    const apiHelper=new ApiHelper(apiContext);
     test.beforeAll(async () => {
+        const apiContext = await request.newContext();
+        const apiHelper=new ApiHelper(apiContext);
         // const apiContext = await request.newContext();
         // const response = await apiContext.fetch('https://api.practicesoftwaretesting.com/products/search?q=hammer');
         // const responseJson = await response.json();

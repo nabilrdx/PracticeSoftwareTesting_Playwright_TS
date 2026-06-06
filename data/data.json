@@ -28,5 +28,21 @@
       "houseNo":"112"
     },
     "paymentMode":"cash-on-delivery"
+  },
+  "orderHistoryData":{
+  
+    "registerUser":{
+      "fName":"Nabil",
+      "lName": "Ansari",
+      "password":"11992288@Nn",
+      "address":{
+        "street": "Rempel Manors",
+        "house_number": "112",
+        "city": "Lake Bobbiemouth",
+        "state": "California",
+        "country": "AL",
+        "postal_code": "421308"
+    }
+    }
   }
 }

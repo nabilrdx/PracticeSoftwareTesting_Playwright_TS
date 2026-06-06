@@ -1,7 +1,19 @@
-import { APIRequestContext, request } from "@playwright/test";
+import { APIRequestContext, Page, request } from "@playwright/test";
+
+type UserAddress = {
+
+    street: string,
+    house_number: string,
+    city: string,
+    state: string,
+    country: string,
+    postal_code: string
+
+}
 
 export class ApiHelper {
     apiContext: APIRequestContext;
+    
     constructor(apiContext: APIRequestContext) {
         this.apiContext = apiContext;
     }
@@ -17,28 +29,133 @@ export class ApiHelper {
 
     }
 
-    async createCart(){
+    async createCart() {
 
-    // const apiContext = await request.newContext();
-    const call = await this.apiContext.post('https://api.practicesoftwaretesting.com/carts')
-    const callRespJson = await call.json();
-    console.log(callRespJson.id);
-    return callRespJson.id;
+        // const apiContext = await request.newContext();
+        const call = await this.apiContext.post('https://api.practicesoftwaretesting.com/carts')
+        const callRespJson = await call.json();
+        console.log(callRespJson.id);
+        return callRespJson.id;
 
 
-}
+    }
 
-    async addItemToCart(cartId: string){
-    const callAtcApi = await this.apiContext.post(`https://api.practicesoftwaretesting.com/carts/${cartId}`,
-        {
-            data: {
-                product_id: await this.getProductId(),
-                quantity: 1
+    async createCartForLoggedInUser(authToken: string) {
+
+
+        // const apiContext = await request.newContext();
+        const call = await this.apiContext.post('https://api.practicesoftwaretesting.com/carts', {
+            headers: {
+                Authorization: `Bearer ${authToken}`
             }
-        }
-    );
-    const atcResp = await callAtcApi.json();
-    console.log(atcResp);
-}
+        })
+        const callRespJson = await call.json();
+        console.log(callRespJson.id);
+        return callRespJson.id;
+
+
+
+    }
+
+    async addItemToCart(cartId: string) {
+        const callAtcApi = await this.apiContext.post(`https://api.practicesoftwaretesting.com/carts/${cartId}`,
+            {
+                data: {
+                    product_id: await this.getProductId(),
+                    quantity: 1
+                }
+            }
+        );
+        const atcResp = await callAtcApi.json();
+        console.log(atcResp);
+    }
+
+    async addItemToCartForLoginUser(cartId: string, authToken: string) {
+        const callAtcApi = await this.apiContext.post(`https://api.practicesoftwaretesting.com/carts/${cartId}`,
+            {
+                data: {
+                    product_id: await this.getProductId(),
+                    quantity: 1
+                },
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                }
+            }
+        );
+        const atcResp = await callAtcApi.json();
+        console.log(atcResp);
+    }
+
+    async regsiterUser(fName: string, lName: string, email: string, password: string, address: UserAddress) {
+        const registerCall = await this.apiContext.post('https://api.practicesoftwaretesting.com/users/register',
+            {
+                data: {
+                    first_name: fName,
+                    last_name: lName,
+                    email: email,
+                    password: password,
+                    address: {
+                        street: address.street,
+                        house_number: address.house_number,
+                        city: address.city,
+                        state: address.state,
+                        country: address.country,
+                        postal_code: address.postal_code
+                    }
+                }
+            }
+        );
+        const registerResp = await registerCall.json();
+        return registerResp;
+
+    }
+
+    async loginUserGetToken(email: string, password: string) {
+        const loginCall = await this.apiContext.post('https://api.practicesoftwaretesting.com/users/login',
+            {
+                data: {
+                    email: email,
+                    password: password
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                }
+            }
+        );
+        const loginCallJson = await loginCall.json();
+        // console.log(loginCallJson)
+        return loginCallJson.access_token;
+
+    }
+
+    async setLoginUserToken(token:string, page:Page){
+        await page.addInitScript(value => {
+        window.localStorage.setItem('auth-token', value);
+    }, token)
+    }
+
+    async createOrderForUser(cartId: string, authToken: string) {
+        const orderCall = await this.apiContext.post('https://api.practicesoftwaretesting.com/invoices', {
+            data: {
+
+                "billing_street": "O'Hara Roads",
+                "billing_city": "South Sibylchester",
+                "billing_state": "New Mexico",
+                "billing_country": "AL",
+                "billing_postal_code": "194",
+                "payment_method": "cash-on-delivery",
+                "payment_details": {},
+                "cart_id": cartId
+            },
+            headers:{
+                Authorization: `Bearer ${authToken}`
+            }
+        });
+
+        const orderJson = await orderCall.json();
+        return orderJson
+    }
+
 
 }
