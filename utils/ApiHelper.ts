@@ -1,5 +1,6 @@
 import { APIRequestContext, Page, request } from "@playwright/test";
 import { UserAddress } from "../interfaces/UserAddress";
+import { CreateOrderPayload } from "../interfaces/CreateOrderPayloadType";
 
 
 export class ApiHelper {
@@ -126,17 +127,11 @@ export class ApiHelper {
     }, token)
     }
 
-    async createOrderForUser(cartId: string, authToken: string) {
+    async createOrderForUser(cartId: string, authToken: string, createOrderPayload: CreateOrderPayload) {
         const orderCall = await this.apiContext.post(`${process.env.API_URL}/invoices`, {
             data: {
 
-                "billing_street": "O'Hara Roads",
-                "billing_city": "South Sibylchester",
-                "billing_state": "New Mexico",
-                "billing_country": "AL",
-                "billing_postal_code": "194",
-                "payment_method": "cash-on-delivery",
-                "payment_details": {},
+                ...createOrderPayload,
                 "cart_id": cartId
             },
             headers:{

@@ -11,38 +11,46 @@
     "existingProduct": "Hammer",
     "nonExistingProduct": "NabilProduct123"
   },
-  "pdp":{
+  "pdp": {
     "productUrl": "https://practicesoftwaretesting.com/product/",
-    "productName":" Claw Hammer with Shock Reduction Grip ",
+    "productName": " Claw Hammer with Shock Reduction Grip ",
     "price": "13.41",
     "atcToastMessage": " Product added to shopping cart. "
   },
-  "cart":{
+  "cart": {
     "atcProductName": "Claw Hammer with Shock Reduction Grip ",
     "atcProductQuantity": "1"
   },
-  "checkoutData":{
-    "billingDetails":{
+  "checkoutData": {
+    "billingDetails": {
       "country": "AL",
       "postalCode": "1094",
-      "houseNo":"112"
+      "houseNo": "112"
     },
-    "paymentMode":"cash-on-delivery"
+    "paymentMode": "cash-on-delivery"
   },
-  "orderHistoryData":{
-  
-    "registerUser":{
-      "fName":"Nabil",
+  "orderHistoryData": {
+    "registerUser": {
+      "fName": "Nabil",
       "lName": "Ansari",
-      "password":"11992288@Nn",
-      "address":{
+      "password": "11992288@Nn",
+      "address": {
         "street": "Rempel Manors",
         "house_number": "112",
         "city": "Lake Bobbiemouth",
         "state": "California",
         "country": "AL",
         "postal_code": "421308"
+      }
     }
-    }
+  },
+  "createOrderPayload": {
+    "billing_street": "O'Hara Roads",
+    "billing_city": "South Sibylchester",
+    "billing_state": "New Mexico",
+    "billing_country": "AL",
+    "billing_postal_code": "194",
+    "payment_method": "cash-on-delivery",
+    "payment_details": {}
   }
 }

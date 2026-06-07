@@ -20,7 +20,7 @@ test('Verify the placed order is available under order history page of the user.
     const cartId = await apiHelper.createCartForLoggedInUser(token);
     await apiHelper.addItemToCartForLoginUser(cartId, token);
 
-    const orderDetails = await apiHelper.createOrderForUser(cartId, token);
+    const orderDetails = await apiHelper.createOrderForUser(cartId, token, data.createOrderPayload);
     console.log(orderDetails.invoice_number, ':::Invoice number created')
 
     await orderHistoryPage.navigateToOrderHistoryPage()

@@ -21,7 +21,7 @@ test('Verify the order details page for the placed order. @smoke', async ({ page
     const cartId = await apiHelper.createCartForLoggedInUser(token);
     await apiHelper.addItemToCartForLoginUser(cartId, token);
 
-    const orderDetails = await apiHelper.createOrderForUser(cartId, token);
+    const orderDetails = await apiHelper.createOrderForUser(cartId, token, data.createOrderPayload);
     console.log(orderDetails.invoice_number, orderDetails.id, ':::Invoice id for order details page');
 
     await orderDetailsPage.openOrderDetailsFor(orderDetails.id)
