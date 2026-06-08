@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
+    
     parameters {
     choice(
         name: 'SUITE',
         choices: ['smoke', 'regression'],
-        description: 'Select suite to execute'
-    )
-}
+        description: 'Select suite to execute')
+        }
     stages {
 
         stage('Install Dependencies') {
@@ -28,7 +28,10 @@ pipeline {
             }
         }
 
-    post {
+    
+}
+
+post {
         always {
             archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
         }
