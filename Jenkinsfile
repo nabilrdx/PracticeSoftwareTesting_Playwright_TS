@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    parameters {
+    choice(
+        name: 'SUITE',
+        choices: ['smoke', 'regression'],
+        description: 'Select suite to execute'
+    )
+}
     stages {
 
         stage('Install Dependencies') {
@@ -15,10 +22,16 @@ pipeline {
             }
         }
 
-        stage('Run Smoke Tests') {
+        stage('Run Tests') {
             steps {
-                bat 'npx playwright test --grep @smoke'
+                bat "npx playwright test --grep @${params.SUITE}"
             }
         }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+        }
+
     }
 }
