@@ -1,13 +1,15 @@
 pipeline {
+
     agent any
 
-    
     parameters {
-    choice(
-        name: 'SUITE',
-        choices: ['smoke', 'regression'],
-        description: 'Select suite to execute')
-        }
+        choice(
+            name: 'SUITE',
+            choices: ['smoke', 'regression'],
+            description: 'Select suite'
+        )
+    }
+
     stages {
 
         stage('Install Dependencies') {
@@ -27,14 +29,14 @@ pipeline {
                 bat "npx playwright test --grep @${params.SUITE}"
             }
         }
+    }
 
-    
-}
-
-post {
+    post {
         always {
-            archiveArtifacts artifacts: 'playwright-report/**', fingerprint: true
+            allure([
+                includeProperties: false,
+                results: [[path: 'allure-results']]
+            ])
         }
-
     }
 }
