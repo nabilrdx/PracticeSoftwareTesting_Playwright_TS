@@ -14,15 +14,28 @@ test.describe('Cart and Checkout Module', () => {
         // const apiContext = await request.newContext();
         // const apiHelper = new ApiHelper(apiContext);
         // const cartPage = new CartPage(page)
+        
 
-        const cartId = await apiHelper.createCart();
+const cartId =await test.step('Create cart using the cart API', async()=>{
+        return await apiHelper.createCart();
+
+});
+await test.step('Add item to cart for the newly created cart', async()=>{
         await apiHelper.addItemToCart(cartId);
+});
+await test.step('Open cart with generated cart id', async()=>{
         await cartPage.openCartWithId(cartId);
 
-        const productRow = await cartPage.getProductRow(data.cart.atcProductName);
+});
+await test.step('Verify that the item added to cart is available under cart & has correct quantity', async()=>{
+    const productRow = await cartPage.getProductRow(data.cart.atcProductName);
 
         await expect(productRow.locator('.product-title')).toHaveText(data.cart.atcProductName);
         await expect(productRow.locator('[data-test="product-quantity"]')).toHaveValue(data.cart.atcProductQuantity)
+});
+
+
+        
     });
 
     test('Verify user can proceed to checkout @smoke', async ({ page, cartPage, apiHelper}) => {
