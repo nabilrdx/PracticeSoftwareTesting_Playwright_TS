@@ -10,7 +10,6 @@ export class LoginPage {
         this.emailInput = page.locator('[data-test="email"]');
         this.passwordInput = page.locator('[data-test="password"]');
         this.loginButton = page.locator('[data-test="login-submit"]');
-
     }
 
     async navigateToLoginPage() {
@@ -39,6 +38,8 @@ export class LoginPage {
         // await this.page.pause()
 
     }
+
+    
 
 
 }

@@ -5,8 +5,8 @@ import { ProductDetailsPage } from '../pages/ProductDetailsPage';
 import { CartPage } from '../pages/CartPage';
 import { OrderDetailsPage } from '../pages/OrderDetailsPage';
 import { OrderHistoryPage } from '../pages/OrderHistoryPage';
-import { ApiHelper } from '../utils/ApiHelper';
-
+import { ApiHelper} from '../utils/ApiHelper';
+import { HeaderHelpers } from '../utils/headerHelpers';
 interface MyFixtures {
     loginPage: LoginPage;
     productListing_searchPage: ProductListing_SearchPage;
@@ -15,6 +15,7 @@ interface MyFixtures {
     orderHistoryPage: OrderHistoryPage;
     orderDetailsPage: OrderDetailsPage;
     apiHelper: ApiHelper;
+    headerHelpers: HeaderHelpers;
 }
 
 
@@ -39,6 +40,9 @@ export const test= base.extend<MyFixtures>({
     },
     apiHelper: async({page, request}, use)=>{
         await use(new ApiHelper(request))
+    },
+    headerHelpers: async({page}, use)=>{
+        await use(new HeaderHelpers(page));
     }
 
 })

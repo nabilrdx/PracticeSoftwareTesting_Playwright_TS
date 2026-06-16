@@ -127,6 +127,13 @@ export class ApiHelper {
     }, token)
     }
 
+    async setLoginUserTokenReload(token:string, page:Page){
+        await page.evaluate(value => {
+        window.localStorage.setItem('auth-token', value);
+    }, token);
+    await page.reload();
+    }
+
     async createOrderForUser(cartId: string, authToken: string, createOrderPayload: CreateOrderPayload) {
         const orderCall = await this.apiContext.post(`${process.env.API_URL}/invoices`, {
             data: {
