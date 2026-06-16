@@ -6,7 +6,7 @@ import { CartPage } from '../pages/CartPage';
 import { OrderDetailsPage } from '../pages/OrderDetailsPage';
 import { OrderHistoryPage } from '../pages/OrderHistoryPage';
 import { ApiHelper} from '../utils/ApiHelper';
-import { HeaderHelpers } from '../utils/headerHelpers';
+import { HeaderHelpers } from '../components/headerComponent';
 interface MyFixtures {
     loginPage: LoginPage;
     productListing_searchPage: ProductListing_SearchPage;
