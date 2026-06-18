@@ -13,7 +13,7 @@ test('Verify the placed order is available under order history page of the user.
     const user = await apiHelper.regsiterUser(data.orderHistoryData.registerUser.fName, data.orderHistoryData.registerUser.lName, `qa-${Date.now()}@yopmail.com`, data.orderHistoryData.registerUser.password, data.orderHistoryData.registerUser.address);
     console.log(user.email, '11992288@Nn', ':::Newly registered user');
 
-    const token = await apiHelper.loginUserGetToken(user.email, '11992288@Nn');
+    const token = await apiHelper.loginUserGetToken({email:user.email, password:'11992288@Nn'});
     // console.log(token, ':::token');
     await apiHelper.setLoginUserToken(token, page);
 

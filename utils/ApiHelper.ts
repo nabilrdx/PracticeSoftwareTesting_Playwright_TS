@@ -1,6 +1,7 @@
 import { APIRequestContext, Page, request } from "@playwright/test";
 import { UserAddress } from "../interfaces/UserAddress";
 import { CreateOrderPayload } from "../interfaces/CreateOrderPayloadType";
+import { LoginUser } from "../interfaces/LoginUser";
 
 
 export class ApiHelper {
@@ -102,12 +103,12 @@ export class ApiHelper {
 
     }
 
-    async loginUserGetToken(email: string, password: string) {
+    async loginUserGetToken(user: LoginUser) {
         const loginCall = await this.apiContext.post(`${process.env.API_URL}/users/login`,
             {
                 data: {
-                    email: email,
-                    password: password
+                    email: user.email,
+                    password: user.password
                 },
                 headers: {
                     'Content-Type': 'application/json',

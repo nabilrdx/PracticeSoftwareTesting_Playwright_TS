@@ -2,6 +2,8 @@ import { expect } from '@playwright/test';
 import { test } from '../../fixtures/baseFixture';
 import { LoginPage } from '../../pages/LoginPage';
 import users from '../../data/data.json';
+import { LoginUser } from '../../interfaces/LoginUser';
+import { UserData } from '../../data/UserData';
 
 test.describe('Login Module', () => {
     test('Verify valid user login @smoke @regression', async ({ page, loginPage }) => {
@@ -12,7 +14,7 @@ test.describe('Login Module', () => {
 
         await test.step('Enter valid creds & perform login', async () => {
 
-            await loginPage.validLogin(users.validUser.email, users.validUser.password);
+            await loginPage.login(UserData.validUser);
         })
 
         await test.step('Verify user is successfully logged in.', async () => {
@@ -24,13 +26,13 @@ test.describe('Login Module', () => {
     test('Verify invalid user login @smoke @regression', async ({ page, loginPage }) => {
         // let loginPage = new LoginPage(page);
         await loginPage.navigateToLoginPage();
-        await loginPage.inValidLogin(users.invalidUser.email, users.invalidUser.password);
+        await loginPage.login(UserData.invalidUser);
         await expect(page.locator('[data-test="login-error"]')).toContainText('Invalid email or password');
     });
 
     test('Verify user is able to logout @regression', async ({ page, loginPage, apiHelper, headerComponent }) => {
         const loginToken = await test.step('Login user via API & get the token', async () => {
-            return await apiHelper.loginUserGetToken(users.validUser.email, users.validUser.password);
+            return await apiHelper.loginUserGetToken(UserData.validUser);
         });
 
         await test.step('Visit the home page of the application', async () => {
@@ -66,7 +68,11 @@ test.describe('Login Module', () => {
         });
         await test.step('Verify user is registered successfully by logging in the user ', async () => { 
             await expect(page).toHaveURL('/auth/login');
-            await loginPage.validLogin(registrationData.email, registrationData.password);
+            const loginData = {
+                email: registrationData.email,
+                password: registrationData.password
+            }
+            await loginPage.login(loginData);
             await expect(page.locator('[data-test="page-title"]')).toContainText('My account');
         });
     });

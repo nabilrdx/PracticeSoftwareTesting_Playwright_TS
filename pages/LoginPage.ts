@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { RegistrationPayload } from '../interfaces/registrationPayload';
+import { LoginUser } from '../interfaces/LoginUser';
 export class LoginPage {
     page: Page;
     emailInput: Locator;
@@ -40,27 +41,15 @@ export class LoginPage {
         await this.page.goto('/auth/login');
     }
 
-    async validLogin(email: string, password: string) {
+    async login(user: LoginUser) {
         // await this.page.goto('https://practicesoftwaretesting.com/auth/login');
         // await this.navigateToLoginPage();
         await this.emailInput.click();
-        await this.emailInput.fill(email);
+        await this.emailInput.fill(user.email);
         await this.passwordInput.click();
-        await this.passwordInput.fill(password);
+        await this.passwordInput.fill(user.password);
         await this.loginButton.click();
         // await this.page.pause()
-    }
-
-    async inValidLogin(email: string, password: string) {
-        // await this.page.goto('https://practicesoftwaretesting.com/auth/login');
-        // await this.navigateToLoginPage();
-        await this.emailInput.click();
-        await this.emailInput.fill(email);
-        await this.passwordInput.click();
-        await this.passwordInput.fill(password);
-        await this.loginButton.click();
-        // await this.page.pause()
-
     }
 
     async navigateToRegistrationPage(){

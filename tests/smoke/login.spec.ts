@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/baseFixture';
 import { LoginPage } from '../../pages/LoginPage';
-import users from '../../data/data.json';
+import { UserData } from '../../data/UserData';
 
 test.describe('Login Module', () => {
     test('Verify valid user login @smoke', async ({ page, loginPage }) => {
@@ -10,12 +10,12 @@ test.describe('Login Module', () => {
             await loginPage.navigateToLoginPage();
         })
 
-        await test.step('Enter valid creds & perform login', async()=>{
+        await test.step('Enter valid creds & perform login', async () => {
 
-            await loginPage.validLogin(users.validUser.email, users.validUser.password);
+            await loginPage.login(UserData.validUser);
         })
-        
-        await test.step('Verify user is successfully logged in.', async()=>{
+
+        await test.step('Verify user is successfully logged in.', async () => {
             await expect(page.locator('[data-test="page-title"]')).toContainText('My account');
 
         })
@@ -24,7 +24,7 @@ test.describe('Login Module', () => {
     test('Verify invalid user login @smoke', async ({ page, loginPage }) => {
         // let loginPage = new LoginPage(page);
         await loginPage.navigateToLoginPage();
-        await loginPage.inValidLogin(users.invalidUser.email, users.invalidUser.password);
+        await loginPage.login(UserData.invalidUser);
         await expect(page.locator('[data-test="login-error"]')).toContainText('Invalid email or password');
     })
 });

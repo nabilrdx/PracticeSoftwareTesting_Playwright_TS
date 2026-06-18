@@ -17,7 +17,7 @@ test.describe('Order Details Module', () => {
         console.log(user.email, '11992288@Nn', ':::Newly registered user');
 
         const token = await test.step('Login the newly registered user & get the token', async () => {
-            return await apiHelper.loginUserGetToken(user.email, '11992288@Nn');
+            return await apiHelper.loginUserGetToken({email: user.email, password: '11992288@Nn'});
         })
         // console.log(token, ':::token');
         await test.step('Set the token to browser', async () => {
