@@ -6,7 +6,8 @@ import { CartPage } from '../pages/CartPage';
 import { OrderDetailsPage } from '../pages/OrderDetailsPage';
 import { OrderHistoryPage } from '../pages/OrderHistoryPage';
 import { ApiHelper} from '../utils/ApiHelper';
-import { HeaderHelpers } from '../components/headerComponent';
+import { headerComponent } from '../components/headerComponent';
+import { TestDataFactory } from '../utils/testDataFactory';
 interface MyFixtures {
     loginPage: LoginPage;
     productListing_searchPage: ProductListing_SearchPage;
@@ -15,7 +16,8 @@ interface MyFixtures {
     orderHistoryPage: OrderHistoryPage;
     orderDetailsPage: OrderDetailsPage;
     apiHelper: ApiHelper;
-    headerHelpers: HeaderHelpers;
+    headerComponent: headerComponent;
+    dataFactory: TestDataFactory;
 }
 
 
@@ -41,8 +43,11 @@ export const test= base.extend<MyFixtures>({
     apiHelper: async({page, request}, use)=>{
         await use(new ApiHelper(request))
     },
-    headerHelpers: async({page}, use)=>{
-        await use(new HeaderHelpers(page));
+    headerComponent: async({page}, use)=>{
+        await use(new headerComponent(page));
+    },
+    dataFactory: async({page}, use)=>{
+        await use(new TestDataFactory());
     }
 
 })

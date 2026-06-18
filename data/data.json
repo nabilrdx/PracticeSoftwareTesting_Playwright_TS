@@ -45,12 +45,30 @@
     }
   },
   "createOrderPayload": {
-    "billing_street": "O'Hara Roads",
-    "billing_city": "South Sibylchester",
-    "billing_state": "New Mexico",
-    "billing_country": "AL",
-    "billing_postal_code": "194",
+    "billing_street": "Schimmel Avenue",
+    "billing_city": "Lake Rubieview",
+    "billing_state": "Minnesota",
+    "billing_country": "US",
+    "billing_postal_code": "90001",
     "payment_method": "cash-on-delivery",
     "payment_details": {}
+  },
+  "registration": {
+    "newUserData": {
+      "fname": "Nabil",
+      "lname": "Ansari",
+      "dob": "1998-01-01",
+      "country": "US",
+      "postalCode": "90001",
+      "houseNo": "32",
+      "phoneNo": "9876543210",
+      "password": "11992288@Nn"
+    }
+  },
+  "plpData":{
+    "categories": {
+      "Hammer": " Hammer ",
+      "Saw": " Saw "
+    }
   }
 }

@@ -3,7 +3,7 @@ import { Page } from "@playwright/test";
 export class OrderDetailsPage{
     page: Page;
     constructor(page:Page){
-        this.page=page
+        this.page=page;
     }
 
     async openOrderDetailsFor(invoice_id:string){

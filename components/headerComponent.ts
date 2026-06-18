@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-export class HeaderHelpers{
+export class headerComponent{
 
         headerDropdown: Locator;
         signOutCta: Locator;

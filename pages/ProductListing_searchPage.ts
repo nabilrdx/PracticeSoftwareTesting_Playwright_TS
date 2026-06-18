@@ -7,6 +7,7 @@ export class ProductListing_SearchPage {
     searchCompletedSection: Locator;
     returnedResultProduct: Locator;
     noRsultsMessage: Locator;
+    productTitle: Locator
 
     constructor(page: Page) {
         this.page = page;
@@ -15,6 +16,7 @@ export class ProductListing_SearchPage {
         this.searchCompletedSection = page.locator('[data-test="search_completed"]');
         this.returnedResultProduct = page.locator('[data-test*="product-"]').first().locator('h5');
         this.noRsultsMessage = page.locator('[data-test="no-results"]');
+        this.productTitle = page.locator('[data-test="product-name"]');
     }
 
     async searchProduct(product: string) {
@@ -35,6 +37,16 @@ export class ProductListing_SearchPage {
 
     async verifyNoResult(){
         return String(await this.noRsultsMessage.textContent()).trim();
+    }
+
+    async getAllProducts(){
+        return await this.productTitle.allTextContents();
+    }
+
+    async selectCategory(category:string){
+        await this.page.getByLabel(category, {
+            exact: true
+        }).check({force: true});
     }
 
 }

@@ -39,6 +39,7 @@ test.describe('Order Details Module', () => {
 
         });
         console.log(orderDetails.invoice_number, orderDetails.id, ':::Invoice id for order details page');
+        console.log(orderDetails, ':::Invoice id for order details page');
 
         await test.step('Open order details page for the created order', async () => {
             await orderDetailsPage.openOrderDetailsFor(orderDetails.id)
