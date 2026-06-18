@@ -1,8 +1,5 @@
 {
-  "products": {
-    "existingProduct": "Hammer",
-    "nonExistingProduct": "NabilProduct123"
-  },
+  
   "pdp": {
     "productUrl": "https://practicesoftwaretesting.com/product/",
     "productName": " Claw Hammer with Shock Reduction Grip ",
