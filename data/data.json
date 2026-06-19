@@ -2,14 +2,7 @@
   
 
   
-  "checkoutData": {
-    "billingDetails": {
-      "country": "AL",
-      "postalCode": "1094",
-      "houseNo": "112"
-    },
-    "paymentMode": "cash-on-delivery"
-  },
+ 
   "orderHistoryData": {
     "registerUser": {
       "fName": "Nabil",

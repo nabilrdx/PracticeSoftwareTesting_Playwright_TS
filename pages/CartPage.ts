@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { BillingDetails } from "../interfaces/BillingDetails";
+import { BillingDetails, PaymentTypes } from "../interfaces/CartModel";
 
 
 
@@ -94,7 +94,7 @@ export class CartPage {
         await this.billingProceed.click();
     }
 
-    async selectPaymentOption(paymentMode:string){
+    async selectPaymentOption(paymentMode:PaymentTypes[keyof PaymentTypes]){
         await this.paymentType.selectOption(paymentMode);
     }
 

@@ -61,8 +61,8 @@ await test.step('Verify that the item added to cart is available under cart & ha
         await cartPage.openCartWithId(cartId);
         await cartPage.proceedToCheckout();
         await cartPage.selectContinueAsGuest();
-        await cartPage.fillBillingAddress(data.checkoutData.billingDetails);
-        await cartPage.selectPaymentOption(data.checkoutData.paymentMode);
+        await cartPage.fillBillingAddress(CartData.billingDetails);
+        await cartPage.selectPaymentOption(CartData.paymentMode.cashOnDelivery);
         await cartPage.confirmPayment();
         await cartPage.verifyPaymentSuccessMessage();
         await cartPage.confirmOrder();
