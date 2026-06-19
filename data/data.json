@@ -1,10 +1,7 @@
 {
   
 
-  "cart": {
-    "atcProductName": "Claw Hammer with Shock Reduction Grip ",
-    "atcProductQuantity": "1"
-  },
+  
   "checkoutData": {
     "billingDetails": {
       "country": "AL",
@@ -47,12 +44,6 @@
       "houseNo": "32",
       "phoneNo": "9876543210",
       "password": "11992288@Nn"
-    }
-  },
-  "plpData":{
-    "categories": {
-      "Hammer": " Hammer ",
-      "Saw": " Saw "
     }
   }
 }

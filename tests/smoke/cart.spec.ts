@@ -3,6 +3,7 @@ import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import data from '../../data/data.json';
 import { CartPage } from '../../pages/CartPage';
+import { CartData } from '../../data/CartData';
 
 test.describe('Cart and Checkout Module', () => {
 
@@ -28,10 +29,10 @@ await test.step('Open cart with generated cart id', async()=>{
 
 });
 await test.step('Verify that the item added to cart is available under cart & has correct quantity', async()=>{
-    const productRow = await cartPage.getProductRow(data.cart.atcProductName);
+    const productRow = await cartPage.getProductRow(CartData.expected.atcProductName);
 
-        await expect(productRow.locator('.product-title')).toHaveText(data.cart.atcProductName);
-        await expect(productRow.locator('[data-test="product-quantity"]')).toHaveValue(data.cart.atcProductQuantity)
+        await expect(productRow.locator('.product-title')).toHaveText(CartData.expected.atcProductName);
+        await expect(productRow.locator('[data-test="product-quantity"]')).toHaveValue(CartData.expected.atcProductQuantity)
 });
 
 

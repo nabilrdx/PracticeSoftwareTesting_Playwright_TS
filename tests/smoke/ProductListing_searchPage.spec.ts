@@ -10,7 +10,7 @@ test.describe('Product Listing/Search Module', ()=>{
         await page.goto('/');
         await productListing_searchPage.searchProduct(PlpData.search.existing);
         await productListing_searchPage.searchCompleted();
-        expect(await productListing_searchPage.verifySearchResult(PlpData.search.nonExisting)).toBeTruthy();
+        expect(await productListing_searchPage.verifySearchResult(PlpData.search.existing)).toBeTruthy();
     })
 
     test('Verify user sees no results for non-existing product @smoke', async({page, productListing_searchPage})=>{

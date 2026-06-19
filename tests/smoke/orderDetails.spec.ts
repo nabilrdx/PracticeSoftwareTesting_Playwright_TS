@@ -5,6 +5,7 @@ import { CartPage } from '../../pages/CartPage';
 import data from '../../data/data.json'
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
+import { CartData } from '../../data/CartData';
 test.describe('Order Details Module', () => {
     test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper }) => {
         // const apiContext = await request.newContext();
@@ -49,7 +50,7 @@ test.describe('Order Details Module', () => {
 
         await test.step('Verify the created order ID & the product used for placing the order on Order Details page', async () => {
             await expect(page.locator('[data-test="invoice-number"]')).toHaveValue(orderDetails.invoice_number);
-            await expect(page.getByRole('cell', { name: 'Claw Hammer with Shock' })).toContainText(data.cart.atcProductName)
+            await expect(page.getByRole('cell', { name: 'Claw Hammer with Shock' })).toContainText(CartData.expected.atcProductName)
         })
 
     });
