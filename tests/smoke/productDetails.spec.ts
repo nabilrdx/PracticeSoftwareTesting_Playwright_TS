@@ -4,6 +4,7 @@ import {test} from '../../fixtures/baseFixture';
 import data from '../../data/data.json';
 import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
 import { ApiHelper } from '../../utils/ApiHelper';
+import { PdpData } from '../../data/PdpData';
 
 test.describe('Product Details Module',  () => {
     let productIdForUrl: string;
@@ -21,16 +22,16 @@ test.describe('Product Details Module',  () => {
     test('Verify product details page loads successfully @smoke', async ({ page, productDetailsPage }) => {
         // let productDetailsPage = new ProductDetailsPage(page);
 
-        await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
-        expect(await productDetailsPage.verifyNameAndPrice(data.pdp.productName, data.pdp.price)).toBeTruthy();
+        await productDetailsPage.navigateToPdp(`${PdpData.productUrl}${productIdForUrl}`);
+        expect(await productDetailsPage.verifyProduct(PdpData.expected.productDetails)).toBeTruthy();
     });
 
     test('Verify Add To Cart @smoke', async ({ page,productDetailsPage }) => {
         // let productDetailsPage = new ProductDetailsPage(page);
-        await productDetailsPage.navigateToPdp(`${data.pdp.productUrl}${productIdForUrl}`);
+        await productDetailsPage.navigateToPdp(`${PdpData.productUrl}${productIdForUrl}`);
         await productDetailsPage.addToCart();
         // await page.getByText(data.pdp.atcToastMessage).waitFor();
-        await expect(page.getByRole("alert")).toHaveText(data.pdp.atcToastMessage);
+        await expect(page.getByRole("alert")).toHaveText(PdpData.expected.message.atcToastMessage);
     })
 
 })

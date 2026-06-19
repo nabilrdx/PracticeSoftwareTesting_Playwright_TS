@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { ProductDetails } from "../interfaces/Pdp.model";
 
 export class ProductDetailsPage {
     productName: Locator;
@@ -18,8 +19,8 @@ export class ProductDetailsPage {
         await this.page.goto(pdpUrl);
     }
 
-    async verifyNameAndPrice(name: string, price: string) {
-        return await this.productName.textContent() == name && await this.productPrice.textContent() == price;
+    async verifyProduct(productDetails: ProductDetails) {
+        return await this.productName.textContent() == productDetails.productName && await this.productPrice.textContent() == productDetails.price;
     }
 
     async addToCart(){
