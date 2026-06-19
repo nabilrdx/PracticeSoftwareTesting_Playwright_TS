@@ -1,4 +1,4 @@
-export interface RegistrationPayload{
+export interface RegistrationForm{
 fname: string;
 lname: string;
 dob: string;

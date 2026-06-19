@@ -8,3 +8,11 @@ export interface UserAddress{
     postal_code: string
 
 }
+
+export interface RegisterUser{
+    fName:string;
+    lName:string;
+    email:string;
+    password:string;
+    address: UserAddress
+}

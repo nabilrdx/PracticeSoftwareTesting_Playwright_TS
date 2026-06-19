@@ -1,7 +1,6 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/baseFixture';
 import { LoginPage } from '../../pages/LoginPage';
-import users from '../../data/data.json';
 import { LoginUser } from '../../interfaces/LoginUser';
 import { UserData } from '../../data/UserData';
 

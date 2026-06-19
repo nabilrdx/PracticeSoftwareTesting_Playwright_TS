@@ -1,12 +1,12 @@
 import { APIRequestContext, Page, request } from "@playwright/test";
-import { UserAddress } from "../interfaces/UserAddress";
-import { CreateOrderPayload } from "../interfaces/CreateOrderPayloadType";
+import { RegisterUser, UserAddress } from "../interfaces/RegisterUser";
+import { CreateOrderPayload } from "../interfaces/CreateOrderPayload";
 import { LoginUser } from "../interfaces/LoginUser";
 
 
 export class ApiHelper {
     apiContext: APIRequestContext;
-    
+
     constructor(apiContext: APIRequestContext) {
         this.apiContext = apiContext;
     }
@@ -79,23 +79,24 @@ export class ApiHelper {
         console.log(atcResp);
     }
 
-    async regsiterUser(fName: string, lName: string, email: string, password: string, address: UserAddress) {
+    async regsiterUser(userDetails: RegisterUser) {
         const registerCall = await this.apiContext.post(`${process.env.API_URL}/users/register`,
             {
                 data: {
-                    first_name: fName,
-                    last_name: lName,
-                    email: email,
-                    password: password,
+                    first_name: userDetails.fName,
+                    last_name: userDetails.lName,
+                    email: userDetails.email,
+                    password: userDetails.password,
                     address: {
-                        street: address.street,
-                        house_number: address.house_number,
-                        city: address.city,
-                        state: address.state,
-                        country: address.country,
-                        postal_code: address.postal_code
+                        street: userDetails.address.street,
+                        house_number: userDetails.address.house_number,
+                        city: userDetails.address.city,
+                        state: userDetails.address.state,
+                        country: userDetails.address.country,
+                        postal_code: userDetails.address.postal_code
                     }
                 }
+
             }
         );
         const registerResp = await registerCall.json();
@@ -122,17 +123,17 @@ export class ApiHelper {
 
     }
 
-    async setLoginUserToken(token:string, page:Page){
+    async setLoginUserToken(token: string, page: Page) {
         await page.addInitScript(value => {
-        window.localStorage.setItem('auth-token', value);
-    }, token)
+            window.localStorage.setItem('auth-token', value);
+        }, token)
     }
 
-    async setLoginUserTokenReload(token:string, page:Page){
+    async setLoginUserTokenReload(token: string, page: Page) {
         await page.evaluate(value => {
-        window.localStorage.setItem('auth-token', value);
-    }, token);
-    await page.reload();
+            window.localStorage.setItem('auth-token', value);
+        }, token);
+        await page.reload();
     }
 
     async createOrderForUser(cartId: string, authToken: string, createOrderPayload: CreateOrderPayload) {
@@ -142,7 +143,7 @@ export class ApiHelper {
                 ...createOrderPayload,
                 "cart_id": cartId
             },
-            headers:{
+            headers: {
                 Authorization: `Bearer ${authToken}`
             }
         });

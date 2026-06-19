@@ -2,20 +2,21 @@ import { expect, request } from '@playwright/test';
 import { test } from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
-import data from '../../data/data.json'
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
 import { CartData } from '../../data/CartData';
+import { CreateOrderData } from '../../data/CreateOrderData';
 test.describe('Order Details Module', () => {
-    test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper }) => {
+    test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper, dataFactory }) => {
         // const apiContext = await request.newContext();
         // const apiHelper = new ApiHelper(apiContext);
         // const orderDetailsPage=new OrderDetailsPage(page);
-
+        const newUserDetails= dataFactory.getNewUserDetails();
         const user = await test.step('Register new user with API', async () => {
-            return await apiHelper.regsiterUser(data.orderHistoryData.registerUser.fName, data.orderHistoryData.registerUser.lName, `qa-${Date.now()}@yopmail.com`, data.orderHistoryData.registerUser.password, data.orderHistoryData.registerUser.address);
+            return await apiHelper.regsiterUser(newUserDetails);
         })
         console.log(user.email, '11992288@Nn', ':::Newly registered user');
+        console.log(user)
 
         const token = await test.step('Login the newly registered user & get the token', async () => {
             return await apiHelper.loginUserGetToken({email: user.email, password: '11992288@Nn'});
@@ -36,7 +37,7 @@ test.describe('Order Details Module', () => {
         });
 
         const orderDetails = await test.step('Create order for user using the API', async () => {
-            return await apiHelper.createOrderForUser(cartId, token, data.createOrderPayload);
+            return await apiHelper.createOrderForUser(cartId, token, CreateOrderData);
 
         });
         console.log(orderDetails.invoice_number, orderDetails.id, ':::Invoice id for order details page');

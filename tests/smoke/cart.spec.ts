@@ -1,7 +1,6 @@
 import {  expect, request } from '@playwright/test';
 import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
-import data from '../../data/data.json';
 import { CartPage } from '../../pages/CartPage';
 import { CartData } from '../../data/CartData';
 

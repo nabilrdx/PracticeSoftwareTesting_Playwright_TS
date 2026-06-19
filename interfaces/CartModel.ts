@@ -10,5 +10,6 @@ export interface BillingDetails {
 }
 
 export interface PaymentTypes{
-    cashOnDelivery: "cash-on-delivery"
+    cashOnDelivery: "cash-on-delivery",
+    cc: "credit-card"
 }

@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { RegistrationPayload } from '../interfaces/registrationPayload';
+import { RegistrationForm } from '../interfaces/RegistrationForm';
 import { LoginUser } from '../interfaces/LoginUser';
 export class LoginPage {
     page: Page;
@@ -56,20 +56,20 @@ export class LoginPage {
         await this.page.goto('/auth/register');
     }
 
-    async fillRegistrationForm(registrationPayload: RegistrationPayload){
-        await this.regFormFirstName.fill(registrationPayload.fname);
-        await this.regFormLastName.fill(registrationPayload.lname);
-        await this.regFormDob.fill(registrationPayload.dob);
-        await this.regFormCountry.selectOption(registrationPayload.country);
-        await this.regFormPostalCode.fill(registrationPayload.postalCode);
+    async fillRegistrationForm(registrationFormData: RegistrationForm){
+        await this.regFormFirstName.fill(registrationFormData.fname);
+        await this.regFormLastName.fill(registrationFormData.lname);
+        await this.regFormDob.fill(registrationFormData.dob);
+        await this.regFormCountry.selectOption(registrationFormData.country);
+        await this.regFormPostalCode.fill(registrationFormData.postalCode);
         await this.regFormHouseNo.click();
-        await this.regFormHouseNo.fill(registrationPayload.houseNo);
+        await this.regFormHouseNo.fill(registrationFormData.houseNo);
         await this.regFormMobileNo.click();
         await this.regFormAddLookUp.waitFor({state: 'visible'});
         await this.regFormAddLookUp.waitFor({state: 'hidden'});
-        await this.regFormMobileNo.fill(registrationPayload.phoneNo);
-        await this.regFormEmail.fill(registrationPayload.email);
-        await this.regFormPassword.fill(registrationPayload.password);
+        await this.regFormMobileNo.fill(registrationFormData.phoneNo);
+        await this.regFormEmail.fill(registrationFormData.email);
+        await this.regFormPassword.fill(registrationFormData.password);
     }
 
     async submitRegistrationForm(){

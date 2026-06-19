@@ -13,6 +13,7 @@ export const CartData = {
     } satisfies BillingDetails,
 
     paymentMode: {
-        cashOnDelivery: "cash-on-delivery"
+        cashOnDelivery: "cash-on-delivery",
+        cc: "credit-card"
     } satisfies PaymentTypes
 }
