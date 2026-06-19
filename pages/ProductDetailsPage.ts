@@ -1,5 +1,5 @@
 import { Locator, Page } from "@playwright/test";
-import { ProductDetails } from "../interfaces/Pdp.model";
+import { ProductDetails } from "../interfaces/Product/ProductDetails";
 
 export class ProductDetailsPage {
     productName: Locator;

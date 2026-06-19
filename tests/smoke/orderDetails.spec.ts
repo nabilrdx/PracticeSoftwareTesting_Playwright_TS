@@ -4,8 +4,8 @@ import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
-import { CartData } from '../../data/CartData';
-import { CreateOrderData } from '../../data/CreateOrderData';
+import { CartData } from '../../data/Cart/CartData';
+import { CreateOrderData } from '../../data/Order/CreateOrderData';
 test.describe('Order Details Module', () => {
     test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper, dataFactory }) => {
         // const apiContext = await request.newContext();

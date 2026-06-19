@@ -3,7 +3,7 @@ import {test} from '../../fixtures/baseFixture';
 
 import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
 import { ApiHelper } from '../../utils/ApiHelper';
-import { PdpData } from '../../data/PdpData';
+import { PdpData } from '../../data/Pdp/PdpData';
 
 test.describe('Product Details Module',  () => {
     let productIdForUrl: string;

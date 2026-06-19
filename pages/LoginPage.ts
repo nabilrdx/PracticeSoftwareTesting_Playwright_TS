@@ -1,6 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
-import { RegistrationForm } from '../interfaces/RegistrationForm';
-import { LoginUser } from '../interfaces/LoginUser';
+import { RegistrationForm } from '../interfaces/user/RegistrationForm';
+import { LoginUser } from '../interfaces/user/LoginUser';
 export class LoginPage {
     page: Page;
     emailInput: Locator;

@@ -1,7 +1,7 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/baseFixture';
 import { ProductListing_SearchPage } from '../../pages/ProductListing_searchPage';
-import { PlpData } from '../../data/PlpData';
+import { PlpData } from '../../data/Plp/PlpData';
 
 test.describe('Product Listing/Search Module', () => {
     test('Verify user can search existing product @smoke', async ({ page, productListing_searchPage }) => {

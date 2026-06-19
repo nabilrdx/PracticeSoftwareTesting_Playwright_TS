@@ -1,7 +1,7 @@
-import { RegistrationForm } from "../interfaces/RegistrationForm";
-import { RegisterUser } from "../interfaces/RegisterUser";
-import { UserData } from "../data/UserData";
-import { RegistrationPageData } from "../data/RegistrationPageData";
+import { RegistrationForm } from "../interfaces/user/RegistrationForm";
+import { RegisterUser } from "../interfaces/user/RegisterUser";
+import { UserData } from "../data/User/UserData";
+import { RegistrationPageData } from "../data/User/RegistrationPageData";
 
 
 // type categoryOfPLP= ' Hammer ' | ' Saw ';

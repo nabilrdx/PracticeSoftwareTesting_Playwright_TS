@@ -1,4 +1,4 @@
-import { RegistrationForm } from "../interfaces/RegistrationForm";
+import { RegistrationForm } from "../../interfaces/user/RegistrationForm";
 
 export const RegistrationPageData={
 formData: {

@@ -2,7 +2,7 @@ import {  expect, request } from '@playwright/test';
 import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
-import { CartData } from '../../data/CartData';
+import { CartData } from '../../data/Cart/CartData';
 
 test.describe('Cart and Checkout Module', () => {
 

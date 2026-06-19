@@ -1,4 +1,4 @@
-import { BillingDetails, CartProductDetails, PaymentTypes } from "../interfaces/CartModel";
+import { BillingDetails, CartProductDetails, PaymentTypes } from "../../interfaces/CartModel";
 
 export const CartData = {
     expected: {

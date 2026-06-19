@@ -1,4 +1,4 @@
-import { Message, ProductDetails } from "../interfaces/Pdp.model";
+import { Message, ProductDetails } from "../../interfaces/Pdp.model";
 
 export const PdpData = {
     productUrl: "https://practicesoftwaretesting.com/product/",

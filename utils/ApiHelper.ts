@@ -1,7 +1,7 @@
 import { APIRequestContext, Page, request } from "@playwright/test";
-import { RegisterUser, UserAddress } from "../interfaces/RegisterUser";
-import { CreateOrderPayload } from "../interfaces/CreateOrderPayload";
-import { LoginUser } from "../interfaces/LoginUser";
+import { RegisterUser, UserAddress } from "../interfaces/user/RegisterUser";
+import { CreateOrderPayload } from "../interfaces/checkout/CreateOrderPayload";
+import { LoginUser } from "../interfaces/user/LoginUser";
 
 
 export class ApiHelper {

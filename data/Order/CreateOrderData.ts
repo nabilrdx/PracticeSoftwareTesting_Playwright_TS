@@ -1,4 +1,4 @@
-import { CreateOrderPayload } from "../interfaces/CreateOrderPayload";
+import { CreateOrderPayload } from "../../interfaces/CreateOrderPayload";
 
 export const CreateOrderData = {
     billing_street: "Schimmel Avenue",

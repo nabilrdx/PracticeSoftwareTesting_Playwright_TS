@@ -1,5 +1,5 @@
-import { LoginUser } from "../interfaces/LoginUser";
-import { RegisterUser } from "../interfaces/RegisterUser";
+import { LoginUser } from "../../interfaces/user/LoginUser";
+import { RegisterUser } from "../../interfaces/user/RegisterUser";
 
 export const UserData = {
     validUser: {

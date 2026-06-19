@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
 import { test } from '../../fixtures/baseFixture';
 import { LoginPage } from '../../pages/LoginPage';
-import { LoginUser } from '../../interfaces/LoginUser';
-import { UserData } from '../../data/UserData';
+import { LoginUser } from '../../interfaces/user/LoginUser';
+import { UserData } from '../../data/User/UserData';
 
 test.describe('Login Module', () => {
     test('Verify valid user login @smoke @regression', async ({ page, loginPage }) => {

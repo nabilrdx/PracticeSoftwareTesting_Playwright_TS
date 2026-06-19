@@ -3,7 +3,7 @@ import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
-import { CreateOrderData } from '../../data/CreateOrderData';
+import { CreateOrderData } from '../../data/Order/CreateOrderData';
 test.describe('Order History Module',()=>{
 test('Verify the placed order is available under order history page of the user. @smoke', async ({ page, orderHistoryPage,apiHelper, dataFactory }) => {
     // const apiContext = await request.newContext();

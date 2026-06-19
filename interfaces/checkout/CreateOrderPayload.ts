@@ -1,4 +1,4 @@
-import { PaymentTypes } from "./CartModel";
+import { PaymentTypes } from "./PaymentTypes";
 
 export interface CreateOrderPayload{
     billing_street: string;

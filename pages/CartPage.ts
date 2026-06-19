@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
-import { BillingDetails, PaymentTypes } from "../interfaces/CartModel";
-
+import { BillingDetails } from "../interfaces/checkout/BillingDetails";
+import { PaymentTypes } from "../interfaces/checkout/PaymentTypes";
 
 
 
