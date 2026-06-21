@@ -5,13 +5,14 @@ import { CartPage } from '../../pages/CartPage';
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
 import { CartData } from '../../data/Cart/CartData';
-import { CreateOrderData } from '../../data/Order/CreateOrderData';
+import { CreateOrderDataBankTransfer, CreateOrderDataBuyNow, CreateOrderDataCod, CreateOrderDataCreditCard, CreateOrderDataGiftCard } from '../../data/Order/CreateOrderData';
 test.describe('Order Details Module', () => {
     test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper, dataFactory }) => {
         // const apiContext = await request.newContext();
         // const apiHelper = new ApiHelper(apiContext);
         // const orderDetailsPage=new OrderDetailsPage(page);
-        const newUserDetails= dataFactory.getNewUserDetails();
+        const newUserDetails = dataFactory.getNewUserDetails();
+        const CreateOrderData = dataFactory.getOrderDetails();
         const user = await test.step('Register new user with API', async () => {
             return await apiHelper.regsiterUser(newUserDetails);
         })
@@ -19,7 +20,7 @@ test.describe('Order Details Module', () => {
         console.log(user)
 
         const token = await test.step('Login the newly registered user & get the token', async () => {
-            return await apiHelper.loginUserGetToken({email: user.email, password: '11992288@Nn'});
+            return await apiHelper.loginUserGetToken({ email: user.email, password: '11992288@Nn' });
         })
         // console.log(token, ':::token');
         await test.step('Set the token to browser', async () => {

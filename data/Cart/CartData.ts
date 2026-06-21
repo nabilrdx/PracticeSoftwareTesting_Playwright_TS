@@ -1,4 +1,9 @@
-import { BillingDetails, CartProductDetails, PaymentTypes } from "../../interfaces/CartModel";
+import { BillingDetails } from "../../interfaces/checkout/BillingDetails";
+import { CartProductDetails } from "../../interfaces/Product/CartProductDetails";
+import { PaymentTypes } from "../../interfaces/checkout/PaymentTypes";
+
+
+
 
 export const CartData = {
     expected: {
@@ -14,6 +19,9 @@ export const CartData = {
 
     paymentMode: {
         cashOnDelivery: "cash-on-delivery",
-        cc: "credit-card"
+        cc: "credit-card",
+        bank: "bank-transfer",
+        bynowpaylater: "buy-now-pay-later",
+        gc: "gift-card",
     } satisfies PaymentTypes
 }

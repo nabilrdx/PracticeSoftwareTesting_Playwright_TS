@@ -3,7 +3,7 @@ import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
-import { CreateOrderData } from '../../data/Order/CreateOrderData';
+import { CreateOrderDataBankTransfer, CreateOrderDataBuyNow, CreateOrderDataCod, CreateOrderDataCreditCard, CreateOrderDataGiftCard } from '../../data/Order/CreateOrderData';
 test.describe('Order History Module',()=>{
 test('Verify the placed order is available under order history page of the user. @smoke', async ({ page, orderHistoryPage,apiHelper, dataFactory }) => {
     // const apiContext = await request.newContext();
@@ -11,6 +11,7 @@ test('Verify the placed order is available under order history page of the user.
     // let orderHistoryPage = new OrderHistoryPage(page);
     const newuserDetails = dataFactory.getNewUserDetails({fName: 'Luka'})
     const user = await apiHelper.regsiterUser(newuserDetails);
+    const CreateOrderData = dataFactory.getOrderDetails();
     console.log(user.email, '11992288@Nn', ':::Newly registered user');
 
     const token = await apiHelper.loginUserGetToken({email:user.email, password:'11992288@Nn'});

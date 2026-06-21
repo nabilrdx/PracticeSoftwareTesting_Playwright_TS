@@ -1,6 +1,6 @@
 import { APIRequestContext, Page, request } from "@playwright/test";
 import { RegisterUser, UserAddress } from "../interfaces/user/RegisterUser";
-import { CreateOrderPayload } from "../interfaces/checkout/CreateOrderPayload";
+import { CreateOrderPayload, CreateOrderPayloadBase } from "../interfaces/checkout/CreateOrderPayload";
 import { LoginUser } from "../interfaces/user/LoginUser";
 
 
