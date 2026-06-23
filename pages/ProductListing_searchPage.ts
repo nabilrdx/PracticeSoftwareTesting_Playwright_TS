@@ -121,7 +121,7 @@ export class ProductListing_SearchPage {
     }
 
     async clickProduct(productName: string){
-        await this.searchCompletedSection.isVisible();
+        
         await this.page.getByText(productName, {
             exact: true
         }).click();

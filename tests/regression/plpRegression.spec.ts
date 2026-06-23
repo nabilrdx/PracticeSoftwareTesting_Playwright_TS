@@ -48,7 +48,7 @@ test.describe('Product Listing/Search Module', () => {
         });
     })
 
-    test('Verify products can be sorted by from price low to high', async({page, productListing_searchPage})=>{
+    test('Verify products can be sorted by from price low to high @regression', async({page, productListing_searchPage})=>{
         await test.step('Navigate to PLP', async()=>{
             const category:string = PlpData.filter.category.Hammer;
             await page.goto('/');
@@ -68,7 +68,7 @@ test.describe('Product Listing/Search Module', () => {
         });
     })
 
-    test('Verify that product details open correctly', async({page, productListing_searchPage, productDetailsPage})=>{
+    test('Verify that product details open correctly @regression', async({page, productListing_searchPage, productDetailsPage})=>{
         //navigate to plp
         await page.goto('/');
         //capture first product name in the list name
