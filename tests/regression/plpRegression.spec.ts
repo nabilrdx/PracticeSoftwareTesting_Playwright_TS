@@ -23,7 +23,7 @@ test.describe('Product Listing/Search Module', () => {
 
     });
 
-    test('Verify filter by category', async ({ page, productListing_searchPage, dataFactory }) => {
+    test('Verify filter by category @regression', async ({ page, productListing_searchPage, dataFactory }) => {
             const category:string = PlpData.filter.category.Saw;
 
         await test.step('Navigate to PLP', async () => {
@@ -45,6 +45,26 @@ test.describe('Product Listing/Search Module', () => {
             for (const prod of products) {
                 expect(prod.trim().toLowerCase()).toContain(category.trim().toLowerCase())
             }
+        });
+    })
+
+    test('Verify products can be sorted by from price low to high', async({page, productListing_searchPage})=>{
+        await test.step('Navigate to PLP', async()=>{
+            const category:string = PlpData.filter.category.Hammer;
+            await page.goto('/');
+            await productListing_searchPage.selectCategory(category);
+        });
+        const expectedPrice = await test.step('Capture product prices before applying sort by', async()=>{
+            return await productListing_searchPage.getproductPricesLowTohigh()
+        })
+        console.log(expectedPrice);
+        const sortedPrice= await test.step('Apply sort by filter as price low to high & capture prices', async()=>{
+            await productListing_searchPage.sortBy(PlpData.sort.lowToHigh);
+            return await productListing_searchPage.getproductPrices();
+        });
+        console.log(sortedPrice);
+        await test.step('Verify that products are listed as price low to high', async()=>{
+            expect(sortedPrice).toEqual(expectedPrice);
         });
     })
 

@@ -7,7 +7,9 @@ export class ProductListing_SearchPage {
     searchCompletedSection: Locator;
     returnedResultProduct: Locator;
     noRsultsMessage: Locator;
-    productTitle: Locator
+    productTitle: Locator;
+    productPrices: Locator;
+    sortByDropDown: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +19,8 @@ export class ProductListing_SearchPage {
         this.returnedResultProduct = page.locator('[data-test*="product-"]').first().locator('h5');
         this.noRsultsMessage = page.locator('[data-test="no-results"]');
         this.productTitle = page.locator('[data-test="product-name"]');
+        this.sortByDropDown = page.locator('[data-test="sort"]');
+        this.productPrices = page.locator('[data-test="product-price"]')
     }
 
     async searchProduct(product: string) {
@@ -35,18 +39,68 @@ export class ProductListing_SearchPage {
         return returnVal;
     }
 
-    async verifyNoResult(){
+    async verifyNoResult() {
         return String(await this.noRsultsMessage.textContent()).trim();
     }
 
-    async getAllProducts(){
+    async getAllProducts() {
         return await this.productTitle.allTextContents();
     }
 
-    async selectCategory(category:string){
+    async selectCategory(category: string) {
+        
         await this.page.getByLabel(category, {
             exact: true
-        }).check({force: true});
+        }).check({ force: true });
+        await this.waitForProductResponse();
+        // await this.page.locator('[data-test="filter_completed"]').waitFor();
+
+        // await this.waitForPlpDataUiUpdate();
+    }
+
+    async sortBy(value: string) {
+        await this.sortByDropDown.selectOption(value);
+        await this.waitForProductResponse();
+        // await this.page.locator('[data-test="filter_completed"]').waitFor(
+        // {
+        //     state:"attached"
+        // }
+        // );
+
+        // await this.waitForPlpDataUiUpdate();
+    }
+
+    async getproductPricesLowTohigh() {
+        const pricesString = await this.productPrices.allTextContents();
+        return pricesString.map(price => price.split('$')[1]).map(Number).sort((a, b) => a - b);
+    }
+
+    async getproductPrices(){
+        const pricesString = await this.productPrices.allTextContents();
+        return pricesString.map(price => price.split('$')[1]).map(Number);
+    }
+
+     waitForProductResponse(){
+        const responsePromise = this.page.waitForResponse(
+            response =>
+                response.url().includes('/products') &&
+                response.status() === 200
+        );
+        return responsePromise;
+    }
+
+    async waitForPlpDataUiUpdate(){
+        
+        await this.page.locator('[data-test="filter_started"]').waitFor(
+            {
+                state: "attached"
+            }
+        );
+        await this.page.locator('[data-test="filter_started"]').waitFor(
+            {
+                state: "hidden"
+            }
+        );
     }
 
 }

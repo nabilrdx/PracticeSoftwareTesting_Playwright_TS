@@ -22,7 +22,12 @@ test('test', async()=>{
   }
   let order = testng.getOrderDetails({
     billing_city: 'Hyderabad',
-    payment_method: "credit-card",
+    payment_method: "bank-transfer",
+    payment_details:{
+      account_name: 'ok',
+      account_number: '8976434088',
+      bank_name: 'test'
+    }
   });
   console.log(order);
 })
