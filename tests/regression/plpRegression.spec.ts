@@ -68,4 +68,22 @@ test.describe('Product Listing/Search Module', () => {
         });
     })
 
+    test('Verify that product details open correctly', async({page, productListing_searchPage, productDetailsPage})=>{
+        //navigate to plp
+        await page.goto('/');
+        //capture first product name in the list name
+        await productListing_searchPage.verifyFirstProductIsDisplayed();
+        const listedProductDetails = await productListing_searchPage.listedProductNameAndPrice();
+        const product = listedProductDetails[0];
+
+
+        //go to it's pdp
+        await productListing_searchPage.clickProduct(product.productName);
+
+        //verify that the plp open is correct by comparing it's name
+        // console.log(await productDetailsPage.verifyProduct(product));
+        await page.pause();
+        expect(await productDetailsPage.verifyProduct(product)).toBeTruthy();
+    })
+
 })

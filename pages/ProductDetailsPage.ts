@@ -20,7 +20,7 @@ export class ProductDetailsPage {
     }
 
     async verifyProduct(productDetails: ProductDetails) {
-        return await this.productName.textContent() == productDetails.productName && await this.productPrice.textContent() == productDetails.price;
+        return await this.productName.textContent() == productDetails.productName && Number(await this.productPrice.textContent()) == productDetails.price;
     }
 
     async addToCart(){

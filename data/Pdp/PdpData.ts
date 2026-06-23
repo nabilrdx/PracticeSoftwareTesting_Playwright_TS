@@ -8,7 +8,7 @@ export const PdpData = {
 
         productDetails:{
             productName: " Claw Hammer with Shock Reduction Grip ",
-            price: "13.41"
+            price: 13.41
         } satisfies ProductDetails,
         message:{ 
             atcToastMessage: " Product added to shopping cart. "

@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import { ProductDetails } from "../interfaces/Product/ProductDetails";
 
 export class ProductListing_SearchPage {
     page: Page;
@@ -32,6 +33,10 @@ export class ProductListing_SearchPage {
         await this.searchCompletedSection.waitFor();
     }
 
+    async verifyFirstProductIsDisplayed(){
+        await this.productTitle.first().waitFor();
+    }
+
     async verifySearchResult(result: string) {
         let productName = await this.returnedResultProduct.textContent();
         let returnVal = String(productName).includes(result);
@@ -45,6 +50,18 @@ export class ProductListing_SearchPage {
 
     async getAllProducts() {
         return await this.productTitle.allTextContents();
+    }
+
+    async listedProductNameAndPrice():Promise <ProductDetails[]>{
+        const productNames:string[]= await this.getAllProducts();
+        const productPrices: number[]= await this.getproductPrices();
+        const productDetails: ProductDetails[] = productNames.map((e, i)=>{
+            return {
+                productName: e,
+                price: productPrices[i]
+            }
+        })
+        return productDetails;
     }
 
     async selectCategory(category: string) {
@@ -101,6 +118,13 @@ export class ProductListing_SearchPage {
                 state: "hidden"
             }
         );
+    }
+
+    async clickProduct(productName: string){
+        await this.searchCompletedSection.isVisible();
+        await this.page.getByText(productName, {
+            exact: true
+        }).click();
     }
 
 }
