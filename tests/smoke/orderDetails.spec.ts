@@ -6,6 +6,7 @@ import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { OrderDetailsPage } from '../../pages/OrderDetailsPage';
 import { CartData } from '../../data/Cart/CartData';
 import { CreateOrderDataBankTransfer, CreateOrderDataBuyNow, CreateOrderDataCod, CreateOrderDataCreditCard, CreateOrderDataGiftCard } from '../../data/Order/CreateOrderData';
+import { PlpData } from '../../data/Plp/PlpData';
 test.describe('Order Details Module', () => {
     test('Verify the order details page for the placed order. @smoke', async ({ page, orderDetailsPage, apiHelper, dataFactory }) => {
         // const apiContext = await request.newContext();
@@ -16,8 +17,7 @@ test.describe('Order Details Module', () => {
         const user = await test.step('Register new user with API', async () => {
             return await apiHelper.regsiterUser(newUserDetails);
         })
-        console.log(user.email, '11992288@Nn', ':::Newly registered user');
-        console.log(user)
+        
 
         const token = await test.step('Login the newly registered user & get the token', async () => {
             return await apiHelper.loginUserGetToken({ email: user.email, password: '11992288@Nn' });
@@ -33,7 +33,7 @@ test.describe('Order Details Module', () => {
 
         });
         await test.step('Add item to cart for the user with created cart & token', async () => {
-            await apiHelper.addItemToCartForLoginUser(cartId, token);
+            await apiHelper.addItemToCartForLoginUser(cartId, token, PlpData.search.existing);
 
         });
 
