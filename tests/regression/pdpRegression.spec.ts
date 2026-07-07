@@ -4,6 +4,7 @@ import {test} from '../../fixtures/baseFixture';
 import { ProductDetailsPage } from '../../pages/ProductDetailsPage';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { PdpData } from '../../data/Pdp/PdpData';
+import { PlpData } from '../../data/Plp/PlpData';
 
 test.describe('Product Details Module',  () => {
     let productIdForUrl: string;
@@ -14,7 +15,7 @@ test.describe('Product Details Module',  () => {
         // const response = await apiContext.fetch('https://api.practicesoftwaretesting.com/products/search?q=hammer');
         // const responseJson = await response.json();
         // console.log(responseJson.data[0].id, 'ProductID');
-        productIdForUrl = await apiHelper.getProductId();
+        productIdForUrl = await apiHelper.getProductId(PlpData.search.existing);
 ;
     })
 
@@ -33,7 +34,7 @@ test.describe('Product Details Module',  () => {
         await expect(page.getByRole("alert")).toHaveText(PdpData.expected.message.atcToastMessage);
     });
 
-    test.only('Verify quantity upate', async({page, productDetailsPage})=>{
+    test('Verify quantity upate', async({page, productDetailsPage})=>{
         //navigate to PDP
         await productDetailsPage.navigateToPdp(`${PdpData.productUrl}${productIdForUrl}`);
         //increase quanity

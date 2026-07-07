@@ -4,6 +4,7 @@ import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
 import { OrderHistoryPage } from '../../pages/OrderHistoryPage';
 import { CreateOrderDataBankTransfer, CreateOrderDataBuyNow, CreateOrderDataCod, CreateOrderDataCreditCard, CreateOrderDataGiftCard } from '../../data/Order/CreateOrderData';
+import { PlpData } from '../../data/Plp/PlpData';
 test.describe('Order History Module',()=>{
 test('Verify the placed order is available under order history page of the user. @smoke', async ({ page, orderHistoryPage,apiHelper, dataFactory }) => {
     // const apiContext = await request.newContext();
@@ -19,7 +20,7 @@ test('Verify the placed order is available under order history page of the user.
     await apiHelper.setLoginUserToken(token, page);
 
     const cartId = await apiHelper.createCartForLoggedInUser(token);
-    await apiHelper.addItemToCartForLoginUser(cartId, token);
+    await apiHelper.addItemToCartForLoginUser(cartId, token, PlpData.search.existing);
 
     const orderDetails = await apiHelper.createOrderForUser(cartId, token, CreateOrderData);
     console.log(orderDetails.invoice_number, ':::Invoice number created')

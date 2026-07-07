@@ -3,6 +3,7 @@ import {test} from '../../fixtures/baseFixture';
 import { ApiHelper } from '../../utils/ApiHelper';
 import { CartPage } from '../../pages/CartPage';
 import { CartData } from '../../data/Cart/CartData';
+import { PlpData } from '../../data/Plp/PlpData';
 
 test.describe('Cart and Checkout Module', () => {
 
@@ -21,7 +22,7 @@ const cartId =await test.step('Create cart using the cart API', async()=>{
 
 });
 await test.step('Add item to cart for the newly created cart', async()=>{
-        await apiHelper.addItemToCart(cartId);
+        await apiHelper.addItemToCart(cartId, PlpData.search.existing);
 });
 await test.step('Open cart with generated cart id', async()=>{
         await cartPage.openCartWithId(cartId);
@@ -44,7 +45,7 @@ await test.step('Verify that the item added to cart is available under cart & ha
         // const cartPage = new CartPage(page)
 
         const cartId = await apiHelper.createCart();
-        await apiHelper.addItemToCart(cartId);
+        await apiHelper.addItemToCart(cartId, PlpData.search.existing);
         await cartPage.openCartWithId(cartId);
         await cartPage.proceedToCheckout();
         await expect(page.getByRole('heading', { name: 'Login' })).toBeVisible();
@@ -56,7 +57,7 @@ await test.step('Verify that the item added to cart is available under cart & ha
         // const cartPage = new CartPage(page)
 
         const cartId = await apiHelper.createCart();
-        await apiHelper.addItemToCart(cartId);
+        await apiHelper.addItemToCart(cartId, PlpData.search.existing);
         await cartPage.openCartWithId(cartId);
         await cartPage.proceedToCheckout();
         await cartPage.selectContinueAsGuest();

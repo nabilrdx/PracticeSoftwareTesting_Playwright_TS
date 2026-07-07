@@ -2,6 +2,8 @@ import { APIRequestContext, Page, request } from "@playwright/test";
 import { RegisterUser, UserAddress } from "../interfaces/user/RegisterUser";
 import { CreateOrderPayload, CreateOrderPayloadBase } from "../interfaces/checkout/CreateOrderPayload";
 import { LoginUser } from "../interfaces/user/LoginUser";
+import { existingTerm, SearchTerms } from "../interfaces/Product/SearchTerms";
+import { PlpData } from "../data/Plp/PlpData";
 
 
 export class ApiHelper {
@@ -11,10 +13,10 @@ export class ApiHelper {
         this.apiContext = apiContext;
     }
 
-    async getProductId() {
+    async getProductId(searchProduct: existingTerm) {
         let productIdForUrl: string;
         // const apiContext = await request.newContext();
-        const response = await this.apiContext.fetch(`${process.env.API_URL}/products/search?q=hammer`);
+        const response = await this.apiContext.fetch(`${process.env.API_URL}/products/search?q=${searchProduct}`);
         const responseJson = await response.json();
         console.log(responseJson.data[0].id, 'ProductID');
         productIdForUrl = responseJson.data[0].id;
@@ -50,12 +52,12 @@ export class ApiHelper {
 
     }
 
-    async addItemToCart(cartId: string) {
+    async addItemToCart(cartId: string, searchProduct: existingTerm, qty:number=1) {
         const callAtcApi = await this.apiContext.post(`${process.env.API_URL}/carts/${cartId}`,
             {
                 data: {
-                    product_id: await this.getProductId(),
-                    quantity: 1
+                    product_id: await this.getProductId(searchProduct),
+                    quantity: `${qty}`
                 }
             }
         );
@@ -63,11 +65,11 @@ export class ApiHelper {
         console.log(atcResp);
     }
 
-    async addItemToCartForLoginUser(cartId: string, authToken: string) {
+    async addItemToCartForLoginUser(cartId: string, authToken: string, searchProduct: existingTerm) {
         const callAtcApi = await this.apiContext.post(`${process.env.API_URL}/carts/${cartId}`,
             {
                 data: {
-                    product_id: await this.getProductId(),
+                    product_id: await this.getProductId(searchProduct),
                     quantity: 1
                 },
                 headers: {

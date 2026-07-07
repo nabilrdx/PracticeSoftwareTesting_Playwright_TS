@@ -9,6 +9,7 @@ export class CartPage {
     cartItemLoaded: Locator;
     checkoutCta: Locator;
     continueAsGuestCta: Locator;
+    addedItemsBody: Locator;
     guestEmail: Locator;
     guestFirstName: Locator;
     guestLastName: Locator;
@@ -51,8 +52,7 @@ export class CartPage {
         this.confirmPaymentCta=this.page.locator('[data-test="finish"]');
         this.paymentSuccessMessage=this.page.locator('[data-test="payment-success-message"]');
         this.orderId=this.page.getByText('INV-');
-        
-
+        this.addedItemsBody = page.locator('tbody');
     }
 
     async openCartWithId(cartId: string) {
@@ -114,5 +114,44 @@ export class CartPage {
         return await this.orderId.textContent();
     }
 
+    async getAddedItemsDetails(){
+        const itemRows = await this.addedItemsBody.locator('tr').all();
+        const productDetails = await Promise.all(
+            itemRows.map(async (e,i)=>{
+            return{
+                name:  await e.locator('[data-test="product-title"]').textContent(),
+                qty: Number(await e.locator('[data-test="product-quantity"]').inputValue()),
+                price: Number(String(await e.locator('[data-test="product-price"]').textContent()).replace('$', '')),
+                lineTotalPrice: Number(String(await e.locator('[data-test="line-price"]').textContent()).replace('$', '')),
+                itemNumber: i+1
+            }
+        })
+        );
+        
+    
+        return productDetails;
+    }
 
+
+
+    async calculateAddedItemsTotal(){
+        const details = await this.getAddedItemsDetails();
+        const total = details.reduce((prev, cur)=>{
+            return prev + (cur.price * cur.qty);
+        }, 0)
+        return total;
+    }
+
+    async getCartTotal(){
+        const cartTotal = Number(String( await this.page.locator('[data-test="cart-total"]').textContent()).replace('$', '').trim());
+        return cartTotal;
+    }   
+
+}
+export interface lookjs{
+    name: string;
+    qty: number;
+    price: number;
+    lineTotalPrice: number;
+    itemNumber: number;
 }

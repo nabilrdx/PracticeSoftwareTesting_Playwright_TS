@@ -1,9 +1,11 @@
+import { SearchTerms } from "../../interfaces/Product/SearchTerms";
+
 export const PlpData = {
 
  search:{
     existing:"Hammer",
     nonExisting:"XYZ123"
- },
+ } satisfies SearchTerms,
 
  filter:{
     category:{
