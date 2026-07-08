@@ -1,6 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 import { BillingDetails } from "../interfaces/checkout/BillingDetails";
 import { PaymentTypes } from "../interfaces/checkout/PaymentTypes";
+import { existingTerm } from "../interfaces/Product/SearchTerms";
 
 
 
@@ -146,6 +147,15 @@ export class CartPage {
         const cartTotal = Number(String( await this.page.locator('[data-test="cart-total"]').textContent()).replace('$', '').trim());
         return cartTotal;
     }   
+
+    async removeItemFromCartAndReturnName(productName: existingTerm){
+        const productDom = this.page.locator('tr').filter({
+            hasText: `${productName}`
+        });
+        const prdctName = await productDom.locator('[data-test="product-title"]').innerText();
+        await productDom.locator('[data-icon="xmark"]').click();
+        return prdctName;
+    }
 
 }
 export interface lookjs{
