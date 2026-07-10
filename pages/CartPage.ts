@@ -65,9 +65,9 @@ export class CartPage {
     }
 
     async getProductRow(productName: string) {
-        return this.page.locator('tr', {
-            hasText: productName
-        });
+       return this.page.locator('tr').filter({
+        has: this.page.getByTestId('product-title').filter({ hasText: productName })
+    });
     }
 
     async proceedToCheckout() {
@@ -155,6 +155,17 @@ export class CartPage {
         const prdctName = await productDom.locator('[data-test="product-title"]').innerText();
         await productDom.locator('[data-icon="xmark"]').click();
         return prdctName;
+    }
+
+    async updateQuantity(name: existingTerm, qty: number){
+        const productRow = await this.getProductRow(name);
+        const qtyField =  this.page.locator('[data-test="product-quantity"]');
+        console.log(qtyField)
+        await qtyField.fill(qty.toString());
+        return {
+            name: name,
+            qty: qty
+        }
     }
 
 }
